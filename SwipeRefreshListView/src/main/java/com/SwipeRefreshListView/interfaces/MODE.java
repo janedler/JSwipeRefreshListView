@@ -1,9 +1,9 @@
 package com.SwipeRefreshListView.interfaces;
 
 /**
- * ListView 状态
+ * SwipeRefreshListView 状态
  *
- * Created by dell on 2016/3/31.
+ * Created by janedler on 2016/3/31.
  */
 public interface MODE {
 
@@ -11,5 +11,4 @@ public interface MODE {
 
     int ONLY_DOWN = 1;                   //  只允许下拉
 
-    int NONE = 2;                        //  不允许上拉与下拉
 }

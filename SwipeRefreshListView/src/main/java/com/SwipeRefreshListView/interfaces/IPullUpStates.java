@@ -1,6 +1,9 @@
 package com.SwipeRefreshListView.interfaces;
 
 /**
+ * SwipeRefreshListView
+ *          拉动的过程中的状态
+ *
  * Created by dell on 2016/3/31.
  */
 public interface IPullUpStates {
@@ -19,6 +22,6 @@ public interface IPullUpStates {
 
     int SCROLL_BOTTOM = 6; //滑到了底部
 
-    int SCROLL_LOADING = 7; //滑到了底部
+    int SCROLL_LOADING = 7; //滑动到了底部进行加载
 
 }

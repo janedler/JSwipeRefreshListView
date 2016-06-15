@@ -12,7 +12,7 @@ import com.JSwipeRefreshListView.adapter.MyAdapter;
 import com.SwipeRefreshListView.interfaces.MODE;
 import com.SwipeRefreshListView.listener.OnPullDownListener;
 import com.SwipeRefreshListView.listener.OnPullUpListener;
-import com.SwipeRefreshListView.view.JSwipeRefreshAutoListView;
+import com.SwipeRefreshListView.view.SwipeRefreshAutoListView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,7 +20,7 @@ import java.util.UUID;
 
 public class AutoListViewActivity extends AppCompatActivity {
 
-    private JSwipeRefreshAutoListView mSwipeRefreshLayout;
+    private SwipeRefreshAutoListView mSwipeRefreshLayout;
     private Button mBtn;
     private ListView mListView;
 
@@ -31,7 +31,8 @@ public class AutoListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auto_listview_layout);
 
-        mSwipeRefreshLayout = (JSwipeRefreshAutoListView) findViewById(R.id.id_list_refresh_layout);
+
+        mSwipeRefreshLayout = (SwipeRefreshAutoListView) findViewById(R.id.id_list_refresh_layout);
         mBtn = (Button) findViewById(R.id.id_list_refresh_btn);
         mListView = mSwipeRefreshLayout.getListView();
 

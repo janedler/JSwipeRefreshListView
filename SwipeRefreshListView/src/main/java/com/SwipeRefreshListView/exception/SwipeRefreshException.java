@@ -1,7 +1,8 @@
 package com.SwipeRefreshListView.exception;
 
 /**
- * JSwipeRefreshListView Exception
+ * SwipeRefreshListView
+ *          Exception
  *
  * Created by janedler on 16/4/2.
  */

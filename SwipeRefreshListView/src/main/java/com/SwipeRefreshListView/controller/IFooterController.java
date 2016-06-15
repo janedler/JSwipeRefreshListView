@@ -3,14 +3,15 @@ package com.SwipeRefreshListView.controller;
 import android.view.View;
 
 /**
- * FooterView控制器基类
+ * SwipeRefreshListView
+ *          Footer加载更多控制器基类
  *
  * Created by janedler on 16/4/2.
  */
 public interface IFooterController {
 
     /**
-     * 设置FooterView
+     * 创建FooterView
      */
     View setFooterView();
 
@@ -28,12 +29,12 @@ public interface IFooterController {
     void pullDownComplete();
 
     /**
-     * 上拉刷新完成了
+     * 上拉刷新完成
      */
     void pullUpSuccess();
 
     /**
-     * 上拉刷新失败了
+     * 上拉刷新失败
      */
     void pullUpError();
 

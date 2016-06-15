@@ -1,7 +1,8 @@
 package com.SwipeRefreshListView.controller;
 
 /**
- * ListView下滑到底部上拉操作进行刷新控制器
+ * SwipeRefreshListView
+ *        下滑到底部上拉操作进行刷新控制器
  *
  * Created by janedler on 16/4/2.
  */

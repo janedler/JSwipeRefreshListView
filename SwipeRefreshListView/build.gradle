@@ -29,7 +29,7 @@ android {
 
 def siteUrl = 'https://github.com/janedler/JSwipeRefreshListView.git'
 def gitUrl = 'git@github.com:janedler/JSwipeRefreshListView.git'
-group = "com.SwipeRefreshListView"
+group = "com.janedler"
 
 install {
     repositories.mavenInstaller {

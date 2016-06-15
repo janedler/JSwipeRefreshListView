@@ -2,11 +2,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.SwipeRefreshListView.view.JSwipeRefreshManualListView
+    <com.SwipeRefreshListView.view.SwipeRefreshManualListView
         android:id="@+id/id_list_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.SwipeRefreshListView.view.JSwipeRefreshManualListView>
+    </com.SwipeRefreshListView.view.SwipeRefreshManualListView>
 
     <Button
         android:id="@+id/id_list_refresh_btn"

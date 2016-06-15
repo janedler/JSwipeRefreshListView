@@ -13,7 +13,7 @@ import com.JSwipeRefreshListView.adapter.MyAdapter;
 import com.SwipeRefreshListView.interfaces.MODE;
 import com.SwipeRefreshListView.listener.OnPullDownListener;
 import com.SwipeRefreshListView.listener.OnPullUpListener;
-import com.SwipeRefreshListView.view.JSwipeRefreshManualListView;
+import com.SwipeRefreshListView.view.SwipeRefreshManualListView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public class ManualListViewActivity extends AppCompatActivity {
 
-    private JSwipeRefreshManualListView mSwipeRefreshLayout;
+    private SwipeRefreshManualListView mSwipeRefreshLayout;
 
     private ListView mListView;
 
@@ -37,7 +37,7 @@ public class ManualListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_listview_layout);
 
-        mSwipeRefreshLayout = (JSwipeRefreshManualListView) findViewById(R.id.id_list_refresh_layout);
+        mSwipeRefreshLayout = (SwipeRefreshManualListView) findViewById(R.id.id_list_refresh_layout);
         mBtn = (Button) findViewById(R.id.id_list_refresh_btn);
         mListView = mSwipeRefreshLayout.getListView();
 

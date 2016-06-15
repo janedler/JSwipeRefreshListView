@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.SwipeRefreshListView.view.JSwipeRefreshAutoListView
+    <com.SwipeRefreshListView.view.SwipeRefreshAutoListView
         android:id="@+id/id_list_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.SwipeRefreshListView.view.JSwipeRefreshAutoListView>
+    </com.SwipeRefreshListView.view.SwipeRefreshAutoListView>
 
     <Button
         android:id="@+id/id_list_refresh_btn"

@@ -1,7 +1,8 @@
 package com.SwipeRefreshListView.controller;
 
 /**
- * ListView下滑到底部自动刷新控制器
+ * SwipeRefreshListView
+ *          下滑到底部自动加载更多控制器
  *
  * Created by janedler on 16/4/2.
  */
