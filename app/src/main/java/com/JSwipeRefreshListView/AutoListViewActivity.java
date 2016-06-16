@@ -31,7 +31,6 @@ public class AutoListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auto_listview_layout);
 
-
         mSwipeRefreshLayout = (SwipeRefreshAutoListView) findViewById(R.id.id_list_refresh_layout);
         mBtn = (Button) findViewById(R.id.id_list_refresh_btn);
         mListView = mSwipeRefreshLayout.getListView();
@@ -70,7 +69,7 @@ public class AutoListViewActivity extends AppCompatActivity {
                         mAdapter.setList(list);
                         mSwipeRefreshLayout.pullDownComplete();
                     }
-                }, 3000);
+                }, 1000);
 
 
             }
@@ -90,11 +89,12 @@ public class AutoListViewActivity extends AppCompatActivity {
                             mAdapter.addList(list);
                             mSwipeRefreshLayout.pullUpSuccess();
                         } else {
-                            int rans = new Random().nextInt(2);
+                            int rans = new Random().nextInt(10);
                             Log.e("TAG","rans>>"+rans);
-                            if (rans == 0) {
+                            if (rans <= 5) {
                                 Log.e("TAG","没有更多的数据了");
                                 mSwipeRefreshLayout.pullUpSuccess("没有更多的数据了");
+                                mSwipeRefreshLayout.setMode(MODE.ONLY_DOWN);
                             } else {
                                 Log.e("TAG","点击重新加载");
                                 mSwipeRefreshLayout.pullUpError("点击重新加载");

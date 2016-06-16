@@ -296,14 +296,14 @@ public abstract class SwipeRefreshBaseListView extends SwipeRefreshLayout {
 
             case IPullUpStates.PULL_UP:
                 setFooterPadding(0, 0, 0, -mFootContentHeight, true);
-                ((SwipeRefreshManualListView) mController).footerStyleManualNomal();
                 mFooterStatus = IPullUpStates.PULL_UP_NOMAL;
+                ((SwipeRefreshManualListView) mController).footerStyleManualNomal();
                 break;
 
             case IPullUpStates.PULL_UP_RELEASE:
                 setFooterPadding(0, 0, 0, 0, true);
-                ((SwipeRefreshManualListView) mController).footerStyleManualLoading();
                 mFooterStatus = IPullUpStates.PULL_UP_LOADING;
+                ((SwipeRefreshManualListView) mController).footerStyleManualLoading();
                 break;
 
             case IPullUpStates.PULL_UP_OVER:
@@ -434,6 +434,7 @@ public abstract class SwipeRefreshBaseListView extends SwipeRefreshLayout {
                 mFooterStatus = IPullUpStates.PULL_UP_NOMAL;
                 if (mMode == MODE.BOTH) {
                     if (mController instanceof SwipeRefreshManualListView) {
+                        mFooterStatus = IPullUpStates.PULL_UP_NOMAL;
                         ((SwipeRefreshManualListView) mController).footerStyleManualNomal();
                     }
                     if (mController instanceof SwipeRefreshAutoListView) {

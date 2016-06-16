@@ -26,7 +26,7 @@ public class SwipeRefreshLog {
      * @param msg The message you would like logged.
      */
     public static int e(String msg) {
-        if (BuildConfig.DEBUG) {
+        if (true) {
             return android.util.Log.e(TAG, msg);
         } else {
             return 0;
@@ -40,7 +40,7 @@ public class SwipeRefreshLog {
      */
     @SuppressWarnings("unused")
     public static String getStackTraceString(Throwable tr) {
-        if (BuildConfig.DEBUG) {
+        if (true) {
             if (tr == null) {
                 return "";
             }

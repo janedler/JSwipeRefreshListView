@@ -24,51 +24,25 @@ import com.SwipeRefreshListView.view.base.SwipeRefreshBaseListView;
 /**
  * 滑到底部进行上拉后进行刷新
  *
- * 在XML中进行如下使用
- * <com.SwipeRefreshListView.view.JSwipeRefreshManualListView
- *  android:id="@+id/id_list_refresh_layout"
- *  android:layout_width="match_parent"
- *  android:layout_height="match_parent">
- * </com.SwipeRefreshListView.view.JSwipeRefreshManualListView>
- *
- * 在Java代码中：
- * SwipeRefreshManualListView mSwipeRefreshLayout = (SwipeRefreshManualListView) findViewById(R.id.id_list_refresh_layout);
- * 通过getListView()可以获得默认的ListView
- * ListView mListView = mSwipeRefreshLayout.getListView();
- * -------支持动态配置上拉或者下拉--------
- * mSwipeRefreshLayout.setMode(MODE.BOTH); //支持上拉下拉刷新
- * mSwipeRefreshLayout.setMode(MODE.ONLY_DOWN); //只支持上拉刷新
- * 提供了3种监听器
- * -------下拉监听器-------
- * mSwipeRefreshLayout.setOnPullDownListener(new OnPullDownListener() {
- *   @Override
- *   public void onRefresh() {
- *      //在这里你可以动态配置HeaderView与FooterView
- *      mSwipeRefreshLayout.setPullDownComplete(); //通知下拉刷新完成
- *  }
- * });
- * -------上拉监听器-------
- * mSwipeRefreshLayout.setOnPullUpListener(new OnPullUpListener() {
- *   @Override
- *   public void onLoad() {
- *     mSwipeRefreshLayout.setPullUpComplete(true); //通知上拉刷新完成 并且还有更多的数据
- *     mSwipeRefreshLayout.setPullUpComplete(false);//通知上拉刷新完成 并且没有数据了
- *   }
- * });
- * ------自动下拉--------
- *  mSwipeRefreshLayout.autoRefreshing();
- *
  * Created by janedler on 16/4/2.
  */
 public class SwipeRefreshManualListView extends SwipeRefreshBaseListView implements IFooterManualController {
 
     private View mFootRootView; //footer view
+
     private TextView mFooterTipTV;
+
     private LinearLayout mFooterContentLayout;
+
     private ProgressBar mFooterbar;
+
     private TextView mFooterHint;
+
     private boolean mLoading;// 是否在加载数据
+
     private String mHint;
+
+    private String mDefaultHint;
 
     public SwipeRefreshManualListView(Context context) {
         super(context);
@@ -85,8 +59,11 @@ public class SwipeRefreshManualListView extends SwipeRefreshBaseListView impleme
 
     @Override
     protected ListView inflateListView() {
+
         ListView listView = (ListView) LayoutInflater.from(mContext).inflate(R.layout.ui_swipe_default_listview, null, false);
+
         listView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
         return listView;
     }
 
@@ -95,23 +72,43 @@ public class SwipeRefreshManualListView extends SwipeRefreshBaseListView impleme
      */
     @Override
     public View setFooterView() {
+
         LinearLayout layout = new LinearLayout(mContext);
+
         layout.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT));
+
         layout.setGravity(Gravity.CENTER);
+
         mFootRootView = LayoutInflater.from(mContext).inflate(R.layout.ui_footer_manual_layout, null, false);
+
         mFooterTipTV = (TextView) mFootRootView.findViewById(R.id.footer_tip);
+
         mFooterContentLayout = (LinearLayout) mFootRootView.findViewById(R.id.footer_content_layout);
+
         mFooterbar = (ProgressBar) mFootRootView.findViewById(R.id.footer_bar);
+
         mFooterHint = (TextView) mFootRootView.findViewById(R.id.footer_hint);
+
+        mDefaultHint = mFooterTipTV.getText().toString();
+
         MeasureUtil.measureView(mFootRootView);//对FooterView进行测量
+
         mFootContentHeight = mFootRootView.getMeasuredHeight(); //得到FooterView测量后高度
+
         layout.addView(mFootRootView);
+
         mFootRootView.setVisibility(VISIBLE);
+
         mFooterTipTV.setVisibility(GONE);
+
         mFooterContentLayout.setVisibility(GONE);
+
         mFooterbar.setVisibility(GONE);
+
         mFooterHint.setVisibility(GONE);
+
         if (mListView.getFooterViewsCount() == 0) mListView.addFooterView(layout);
+
         return mFootRootView;
     }
 
@@ -124,15 +121,25 @@ public class SwipeRefreshManualListView extends SwipeRefreshBaseListView impleme
      */
     @Override
     public void setMode(int mode) {
+
         mMode = mode;
+
         if (mode == MODE.BOTH) {
+
             mFootRootView.setVisibility(VISIBLE);
+
         } else if (mode == MODE.ONLY_DOWN) {
+
             mFootRootView.setVisibility(VISIBLE);
+
             mFooterTipTV.setVisibility(GONE);
+
             mFooterContentLayout.setVisibility(GONE);
+
             mFooterbar.setVisibility(GONE);
+
             mFooterHint.setVisibility(GONE);
+
             footerStylePullUpOnlyDown();
         }
     }
@@ -151,26 +158,61 @@ public class SwipeRefreshManualListView extends SwipeRefreshBaseListView impleme
      */
     @Override
     public void footerStyleManualNomal() {
+
         SwipeRefreshLog.e("Manual -- Footer style nomal");
+
         mLoading = false;
 
+        mFooterStatus = IPullUpStates.PULL_UP_NOMAL;
+
         mFootRootView.setVisibility(VISIBLE);
+
         mFooterTipTV.setVisibility(VISIBLE);
+
         mFooterContentLayout.setVisibility(GONE);
+
+        mFooterTipTV.setText(mDefaultHint);
     }
+
+
+    public void footerStyleManualNomal(String hint) {
+
+        SwipeRefreshLog.e("Manual -- Footer style nomal");
+
+        mLoading = false;
+
+        mFooterStatus = IPullUpStates.PULL_UP_NOMAL;
+
+        mFootRootView.setVisibility(VISIBLE);
+
+        mFooterTipTV.setVisibility(VISIBLE);
+
+        mFooterContentLayout.setVisibility(GONE);
+
+        mFooterTipTV.setText(hint);
+    }
+
 
     /**
      * 上拉的状态
      */
     @Override
     public void footerStyleManualPullUp() {
+
         SwipeRefreshLog.e("Manual -- Footer style pull up");
+
         mFootRootView.setVisibility(VISIBLE);
+
         mFooterTipTV.setVisibility(GONE);
+
         mFooterContentLayout.setVisibility(VISIBLE);
+
         mFooterbar.setVisibility(VISIBLE);
+
         mFooterHint.setVisibility(VISIBLE);
+
         mFooterHint.setText("上拉进行加载");
+
     }
 
 
@@ -179,12 +221,19 @@ public class SwipeRefreshManualListView extends SwipeRefreshBaseListView impleme
      */
     @Override
     public void footerStyleManualRelease() {
+
         SwipeRefreshLog.e("Manual -- Footer style release");
+
         mFootRootView.setVisibility(VISIBLE);
+
         mFooterTipTV.setVisibility(GONE);
+
         mFooterContentLayout.setVisibility(VISIBLE);
+
         mFooterbar.setVisibility(VISIBLE);
+
         mFooterHint.setVisibility(VISIBLE);
+
         mFooterHint.setText("松开进行加载");
     }
 
@@ -193,15 +242,23 @@ public class SwipeRefreshManualListView extends SwipeRefreshBaseListView impleme
      */
     @Override
     public void footerStyleManualLoading() {
+
         SwipeRefreshLog.e("Manual -- Footer style loading");
 
         if (mPullUpListener != null) mPullUpListener.onLoad();
+
         mLoading = true;
+
         mFootRootView.setVisibility(VISIBLE);
+
         mFooterTipTV.setVisibility(GONE);
+
         mFooterContentLayout.setVisibility(VISIBLE);
+
         mFooterbar.setVisibility(VISIBLE);
+
         mFooterHint.setVisibility(VISIBLE);
+
         mFooterHint.setText("正在加载");
     }
 
@@ -211,15 +268,24 @@ public class SwipeRefreshManualListView extends SwipeRefreshBaseListView impleme
      */
     @Override
     public void footerStyleManualOver() {
+
         SwipeRefreshLog.e("Manual -- Footer style over");
+
         mLoading = false;
+
         mFooterStatus = IPullUpStates.PULL_UP_OVER;
+
         mFootRootView.setVisibility(VISIBLE);
-        mFooterTipTV.setVisibility(GONE);
-        mFooterContentLayout.setVisibility(VISIBLE);
+
+        mFooterTipTV.setVisibility(VISIBLE);
+
+        mFooterContentLayout.setVisibility(GONE);
+
         mFooterbar.setVisibility(GONE);
-        mFooterHint.setVisibility(VISIBLE);
-        mFooterHint.setText(mHint);
+
+        mFooterHint.setVisibility(GONE);
+
+        mFooterTipTV.setText(mHint);
     }
 
 
@@ -229,12 +295,19 @@ public class SwipeRefreshManualListView extends SwipeRefreshBaseListView impleme
      */
     @Override
     public void footerStylePullUpOnlyDown() {
+
         mLoading = false;
+
         mFootRootView.setVisibility(VISIBLE);
+
         mFooterTipTV.setVisibility(GONE);
+
         mFooterContentLayout.setVisibility(GONE);
+
         mFooterbar.setVisibility(GONE);
+
         mFooterHint.setVisibility(GONE);
+
     }
 
 
@@ -243,12 +316,34 @@ public class SwipeRefreshManualListView extends SwipeRefreshBaseListView impleme
      */
     @Override
     public void pullUpSuccess() {
-        pullUpSuccess("");
+
+        dealWithMessage("");
+
+    }
+
+    public void pullUpSuccess(String hint) {
+
+        dealWithMessage(hint);
+
+    }
+
+    /**
+     * 上拉刷新失败了
+     */
+    public void pullUpError(){
+
+        dealWithMessage("");
+
+    }
+
+    public void pullUpError(String hint){
+
+        dealWithMessage(hint);
+
     }
 
 
-
-    public void pullUpSuccess(String hint) {
+    public void dealWithMessage(String hint) {
         mLoading = false; // 修改加载标记
         this.mHint = hint;
 
@@ -260,18 +355,13 @@ public class SwipeRefreshManualListView extends SwipeRefreshBaseListView impleme
         if (TextUtils.isEmpty(hint)){
             setFooterPadding(0, 0, 0, -mFootContentHeight,true);
             footerStylePullUpHint();
+
         } else {
             setFooterPadding(0, 0, 0, 0,true);
-            footerStyleManualOver();
+            footerStyleManualNomal(hint);
         }
     }
 
-    /**
-     * 上拉刷新失败了
-     */
-    public void pullUpError(){
-        pullUpSuccess("");
-    }
 
     /**
      * 隐藏状态
@@ -280,12 +370,9 @@ public class SwipeRefreshManualListView extends SwipeRefreshBaseListView impleme
         mLoading = false;
         mFooterStatus = IPullUpStates.PULL_UP_NOMAL;
         mFootRootView.setVisibility(VISIBLE);
-        mFooterTipTV.setVisibility(VISIBLE);
+        mFooterTipTV.setVisibility(GONE);
         mFooterContentLayout.setVisibility(GONE);
     }
-
-
-
 
 }
 

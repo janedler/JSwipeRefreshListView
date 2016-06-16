@@ -75,7 +75,7 @@ public class ManualListViewActivity extends AppCompatActivity {
 
 
                     }
-                }, 3000);
+                }, 1000);
 
 
             }
@@ -99,14 +99,14 @@ public class ManualListViewActivity extends AppCompatActivity {
                             Log.e("TAG","rans>>"+rans);
                             if (rans == 0) {
                                 Log.e("TAG","没有更多的数据了");
-                                mSwipeRefreshLayout.pullUpSuccess("没有更多的数据了");
+                                mSwipeRefreshLayout.pullUpSuccess();
                             } else {
                                 Log.e("TAG","点击重新加载");
-                                mSwipeRefreshLayout.pullUpError();
+                                mSwipeRefreshLayout.pullUpError("上拉刷新失败");
                             }
                         }
                     }
-                }, 3000);
+                }, 1000);
             }
         });
 

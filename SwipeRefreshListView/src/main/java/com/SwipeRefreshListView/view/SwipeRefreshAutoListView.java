@@ -24,40 +24,6 @@ import com.SwipeRefreshListView.view.base.SwipeRefreshBaseListView;
 /**
  * 滑到底部自动进行刷新
  *
- * 在XML中进行如下使用
- * <com.SwipeRefreshListView.view.SwipeRefreshAutoListView
- *  android:id="@+id/id_list_refresh_layout"
- *  android:layout_width="match_parent"
- *  android:layout_height="match_parent">
- * </com.SwipeRefreshListView.view.SwipeRefreshAutoListView>
- *
- * 在Java代码中：
- * SwipeRefreshManualListView mSwipeRefreshLayout = (SwipeRefreshManualListView) findViewById(R.id.id_list_refresh_layout);
- * 通过getListView()可以获得默认的ListView
- * ListView mListView = mSwipeRefreshLayout.getListView();
- * -------支持动态配置上拉或者下拉--------
- * mSwipeRefreshLayout.setMode(MODE.BOTH); //支持上拉下拉刷新
- * mSwipeRefreshLayout.setMode(MODE.ONLY_DOWN); //只支持上拉刷新
- * 提供了3种监听器
- * -------下拉监听器-------
- * mSwipeRefreshLayout.setOnPullDownListener(new OnPullDownListener() {
- *   @Override
- *   public void onRefresh() {
- *      //在这里你可以动态配置HeaderView与FooterView
- *      mSwipeRefreshLayout.setPullDownComplete(); //通知下拉刷新完成
- *  }
- * });
- * -------上拉监听器-------
- * mSwipeRefreshLayout.setOnPullUpListener(new OnPullUpListener() {
- *   @Override
- *   public void onLoad() {
- *     mSwipeRefreshLayout.setPullUpComplete(true); //通知上拉刷新完成 并且还有更多的数据
- *     mSwipeRefreshLayout.setPullUpComplete(false);//通知上拉刷新完成 并且没有数据了
- *   }
- * });
- * ------自动下拉--------
- *  mSwipeRefreshLayout.autoRefreshing();
- *
  * Created by janedler on 16/4/2.
  */
 public class SwipeRefreshAutoListView extends SwipeRefreshBaseListView implements IFooterAutoController {
